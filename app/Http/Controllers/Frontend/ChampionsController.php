@@ -16,10 +16,11 @@ class ChampionsController extends Controller
         return view('frontend.champions',compact('champions'));
     }
 
-    public function champion_single($id){
+    public function champion_single($Id){
         
-        $champion = Champion::findOrFail($id)->with(['languages','media'])->first();
- 
+        $champion = Champion::findOrFail($Id);
+        $champion->load(['languages','media']);
+  
 
         return view('frontend.champion_single',compact('champion'));
 

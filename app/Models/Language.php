@@ -20,6 +20,7 @@ class Language extends Model
 
     protected $fillable = [
         'language',
+        'rate',
         'created_at',
         'updated_at',
         'deleted_at',

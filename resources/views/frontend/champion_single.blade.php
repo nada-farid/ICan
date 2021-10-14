@@ -37,15 +37,17 @@
               <div class="champion_details">
                   <h5>المهارات </h5>
             <ul>
-            <li>
+         
                 @foreach($champion->languages as $key => $language)
+                <li>
 <h6 > {{ $language->language }}</h6>
+<p></p>
 
+ 
 <div class="progress">
-<div class="progress-bar progress-bar-striped  bg-info" style="width:80%" role="progressbar" aria-valuenow="{{$language}}" aria-valuemin="0" aria-valuemax="100">80%</div>
+  <div class="progress-bar progress-bar-striped  bg-info" style="width:{{$language->pivot->rate}}%" role="progressbar" aria-valuenow="{{$language->pivot->rate}}" aria-valuemin="0" aria-valuemax="100">{{$language->pivot->rate}}%</div>
 </div></li>
                  <br />
-                  <li>
      
                     @endforeach
                      

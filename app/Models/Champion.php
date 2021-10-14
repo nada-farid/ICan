@@ -48,7 +48,7 @@ class Champion extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
-        'rate',
+  
     ];
 
     public function registerMediaConversions(Media $media = null)
@@ -71,7 +71,7 @@ class Champion extends Model implements HasMedia
 
     public function languages()
     {
-        return $this->belongsToMany(Language::class);
+        return $this->belongsToMany(Language::class)->withPivot('rate');
     }
 
     public function getTournamentPhotoAttribute()
