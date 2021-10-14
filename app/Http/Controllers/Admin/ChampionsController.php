@@ -31,7 +31,7 @@ class ChampionsController extends Controller
     {
         abort_if(Gate::denies('champion_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $languages = Language::pluck('language', 'id');
+        $languages = Language::all();
 
         return view('admin.champions.create', compact('languages'));
     }
@@ -39,7 +39,7 @@ class ChampionsController extends Controller
     public function store(StoreChampionRequest $request)
     {
         $champion = Champion::create($request->all());
-        $champion->languages()->sync($request->input('languages', []));
+        $champion->languages()->sync($this->mapallang($request['languages']));
         if ($request->input('photo', false)) {
             $champion->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
         }
@@ -151,5 +151,12 @@ class ChampionsController extends Controller
         $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
+    }
+
+    private function mapallang($languages)
+    {
+        return collect($languages)->map(function ($i) {
+            return ['rate' => $i];
+        });
     }
 }

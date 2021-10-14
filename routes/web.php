@@ -1,6 +1,6 @@
 <?php
 
-Route::redirect('/', '/login');
+Route::redirect('/admin', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -97,4 +97,23 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
         Route::post('profile', 'ChangePasswordController@updateProfile')->name('password.updateProfile');
         Route::post('profile/destroy', 'ChangePasswordController@destroy')->name('password.destroyProfile');
     }
+});
+//frontend
+Route::group([ 'namespace' => 'Frontend'], function () {
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/about', 'AboutUsController@about')->name('frontend.about_us');
+
+Route::get('/PracticalSolution', 'PracticalSolutionsController@all')->name('frontend.practical_solutions');
+Route::get('/Show_PracticalSolution/{id}', 'PracticalSolutionsController@show')->name('frontend.practical_solution_show');
+Route::get('/medical_opinions', 'MedicalOpinionsController@opinions')->name('frontend.medical_opinions');
+Route::get('/champions', 'ChampionsController@champions')->name('frontend.champions');
+Route::get('/champion_single/{id}', 'ChampionsController@champion_single')->name('frontend.champion_single');
+Route::get('/tools', 'SpecialToolsController@tools')->name('frontend.tools');
+Route::get('/contact_us', 'ContactusController@contactus')->name('frontend.contactus');
+Route::Post('/contact_us/store', 'ContactusController@store')->name('frontend.contactus-store');
+
+
+
 });

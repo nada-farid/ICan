@@ -21,42 +21,15 @@ class AboutUsController extends Controller
     {
         abort_if(Gate::denies('about_us_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $aboutuses = AboutUs::with(['media'])->get();
-
-        return view('admin.aboutuses.index', compact('aboutuses'));
-    }
-
-    public function create()
-    {
-        abort_if(Gate::denies('about_us_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.aboutuses.create');
-    }
-
-    public function store(StoreAboutUsRequest $request)
-    {
-        $aboutUs = AboutUs::create($request->all());
-
-        if ($request->input('phote', false)) {
-            $aboutUs->addMedia(storage_path('tmp/uploads/' . basename($request->input('phote'))))->toMediaCollection('phote');
-        }
-
-        if ($media = $request->input('ck-media', false)) {
-            Media::whereIn('id', $media)->update(['model_id' => $aboutUs->id]);
-        }
-
-        return redirect()->route('admin.aboutuses.index');
-    }
-
-    public function edit(AboutUs $aboutUs)
-    {
-        abort_if(Gate::denies('about_us_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $aboutUs=AboutUs::with(['media'])->first();
 
         return view('admin.aboutuses.edit', compact('aboutUs'));
     }
 
+
     public function update(UpdateAboutUsRequest $request, AboutUs $aboutUs)
     {
+        $aboutUs=AboutUs::first();
         $aboutUs->update($request->all());
 
         if ($request->input('phote', false)) {

@@ -13,6 +13,7 @@ class CreateChampionLanguagePivotTable extends Migration
             $table->foreign('champion_id', 'champion_id_fk_5070522')->references('id')->on('champions')->onDelete('cascade');
             $table->unsignedBigInteger('language_id');
             $table->foreign('language_id', 'language_id_fk_5070522')->references('id')->on('languages')->onDelete('cascade');
+        
         });
     }
 }
