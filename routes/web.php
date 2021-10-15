@@ -113,7 +113,7 @@ Route::get('/champion_single/{id}', 'ChampionsController@champion_single')->name
 Route::get('/tools', 'SpecialToolsController@tools')->name('frontend.tools');
 Route::get('/contact_us', 'ContactusController@contactus')->name('frontend.contactus');
 Route::Post('/contact_us/store', 'ContactusController@store')->name('frontend.contactus-store');
-
+Route::Post('/problems/store', 'ProblemsController@store')->name('frontend.problem');
 
 
 });

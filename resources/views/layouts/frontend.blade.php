@@ -262,11 +262,12 @@
             <div class="loginmodal-container text-center">
                 <i class="fas fa-heart-broken" aria-hidden="true"></i>
                 <h1>عندي مشكلة </h1>
-                <form>
-                    <input type="text" name="user" placeholder="عنوان ">
-                    <input type="text" name="user" placeholder="البريد الإلكتروني ">
-                    <input type="text" name="user" placeholder="رقم التليفون ">
-                    <textarea id="w3review" name="" rows="4">
+                <form  action="{{route('frontend.problem')}}" method="POST">
+                    @csrf
+                    <input type="text" name="title" placeholder="عنوان ">
+                    <input type="text" name="email" placeholder="البريد الإلكتروني ">
+                    <input type="text" name="phone" placeholder="رقم التليفون ">
+                    <textarea id="w3review" name="description" rows="4">
 
 </textarea>
                     <input type="submit" name="login" class=" loginmodal-submit" value="إرسال">

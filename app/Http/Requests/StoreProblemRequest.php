@@ -11,7 +11,7 @@ class StoreProblemRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('problem_create');
+        return true;
     }
 
     public function rules()
