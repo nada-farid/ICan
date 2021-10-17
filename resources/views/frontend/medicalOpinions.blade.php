@@ -5,6 +5,13 @@
 
         <div class="container">
             @foreach ($medicalOpinions as $medicalOpinion)
+            @php
+            if($medicalOpinion->photo){
+                $medicalOpinions_image = $medicalOpinion->photo->getUrl('preview2');
+            }else{
+                $medicalOpinions_image = '';
+            }
+        @endphp
                 <div class="row">
                     <div class="col-md-1"></div>
 
@@ -14,7 +21,7 @@
                             <div class="row">
 
                                 <div class="col-md-2">
-                                    <div class="pic"><img src="{{ asset('frontend/img/medical01.jpg') }}"
+                                    <div class="pic"><img src="{{ $medicalOpinions_image }}"
                                             class="img-fluid"></div>
                                 </div>
                                 <div class="col-md-8">

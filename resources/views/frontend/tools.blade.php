@@ -9,10 +9,17 @@
 
           @foreach ($specialTools as $specialTool)
             
+          @php
+          if($specialTool->photo){
+              $specialTool_img = $specialTool->photo->getUrl('preview2');
+          }else{
+              $specialTool_img = '';
+          }
+      @endphp
             <div class="col-md-3">
                 <div class="team_  bg-secondary text-white  border-bottom">
 
-                    <img src="{{asset('frontend/img/tool01.png')}}" />
+                    <img src="{{$specialTool_img}}">
                     <h4> {{$specialTool->name ?? ''}}</h4>
                     <div class="jobtitle">{{$specialTool->description ?? ''}}
                         </div>

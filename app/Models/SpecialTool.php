@@ -38,7 +38,7 @@ class SpecialTool extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
-        $this->addMediaConversion('preview2')->fit('crop', 180, 180);
+        $this->addMediaConversion('preview2')->fit('crop', 150, 150);
     }
 
     public function getPhotoAttribute()

@@ -308,7 +308,7 @@
             <div class="row ">
                 <div class="col-md-12 text-center">
 
-                    <button class="btn-primary"> <a href="medical_opinions.html"><i class="fas fa-plus"
+                    <button class="btn-primary"> <a  href="{{ route('frontend.medical_opinions') }}"><i class="fas fa-plus"
                                 aria-hidden="true"></i> عرض الكل </a> </button>
                 </div>
             </div>

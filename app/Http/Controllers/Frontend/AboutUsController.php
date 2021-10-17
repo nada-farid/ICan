@@ -14,7 +14,7 @@ class AboutUsController extends Controller
     public function about(){
 
           
-        $about=AboutUs::first();
+        $about=AboutUs::with('media')->first();
         $staffs = Staff::with(['media'])->get();
         return view('frontend.about',compact('about','staffs'));
 

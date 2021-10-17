@@ -7,7 +7,14 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <div class="about_pic"><img src="{{ asset('frontend/img/about.png') }}" width="300"></div>
+                    @php
+                    if($about->phote){
+                        $about_img = $about->phote->getUrl('preview2');
+                    }else{
+                        $about_img = '';
+                    }
+                @endphp
+                    <div class="about_pic"><img src="{{ $about_img }}" class="img-fluid rounded-circle"></div>
                     <div class="text">
                         <h3>مرحبــــــــــا بكــم</h3>
 
@@ -114,8 +121,14 @@
                 @foreach ($staffs as $staff)
                     <li>
                         <div class="team_">
-
-                            <img src="{{ asset('frontend/img/team05.png') }}" />
+                            @php
+                            if($staff->photo){
+                                $staff_img = $staff->photo->getUrl('preview');
+                            }else{
+                                $staff_img = '';
+                            }
+                        @endphp
+                            <img src="{{$staff_img}}" />
                             <h4> {{ $staff->name }} </h4>
                             <div class="jobtitle"> {{ $staff->job_tilte }} </div>
                         </div>

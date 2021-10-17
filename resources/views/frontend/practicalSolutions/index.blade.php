@@ -10,13 +10,22 @@
                 <div class="row">
                     @foreach ($practicalSolutions as $practicalSolution)
 
+                    @php
+                    if($practicalSolution->photo){
+                        $solution_image = $practicalSolution->photo->getUrl('preview2');
+                    }else{
+                        $solution_image = '';
+                    }
+                @endphp
+
                         <div class="col-md-6">
 
                             <div class="home__services">
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="pic"><img src="img/solutions_01.jpg" class="img-fluid">
+        
+                                        <div class="pic"><img src="{{ $solution_image }}"  class="img-fluid">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -37,6 +46,7 @@
 
                         </div>
                     @endforeach
+                </div>
 
                     {{ $practicalSolutions->links() }}
 

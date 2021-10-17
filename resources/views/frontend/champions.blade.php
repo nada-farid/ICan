@@ -9,10 +9,18 @@
 
                 @foreach ($champions as $champion)
 
+                @php
+                if($champion->photo){
+                    $champion_img = $champion->photo->getUrl('preview2');
+                }else{
+                    $champion_img = '';
+                }
+            @endphp
+
                     <div class="col-md-3">
                         <div class="team_ border-bottom">
 
-                            <img src="{{ $champion->photo->getUrl('preview2') }}" />
+                            <img src="{{ $champion_img}}" />
                             <h4> {{ $champion->name ?? '' }}</h4>
                             <div class="jobtitle">{{ $champion->brief ?? '' }} </div>
                             <div class="more"><span><a
