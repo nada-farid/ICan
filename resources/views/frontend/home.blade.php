@@ -11,13 +11,13 @@
 
 
         <ul id="demo1">
-            <li>
-
-                <img src="{{ asset('frontend/img/slide01.png') }}" />
-            </li>
-            <li><img src="{{ asset('frontend/img/slide02.png') }}" /></li>
-
-
+            @foreach ($sliders as $slider)
+                @foreach ($slider->photo as $key => $media)
+                    <li>
+                        <img src="{{ $media->getUrl() }}" />
+                    </li>
+                @endforeach
+            @endforeach
         </ul>
 
 
@@ -33,9 +33,7 @@
                         <div class="text">
                             <h3>مرحبــــــــــا بكــم</h3>
 
-                            <p>{{ $about->description ?? '' }} </p>
-                            <div>
-                            </div>
+                            <p><?php echo nl2br($about->description); ?> </p> 
                         </div>
 
 
@@ -133,6 +131,13 @@
                         @foreach ($solutions as $solution)
 
 
+                        @php
+                            if($solution->photo){
+                                $solution_image = $solution->photo->getUrl('preview2');
+                            }else{
+                                $solution_image = '';
+                            }
+                        @endphp
                             <div class="col-md-6">
 
                                 <div class="home__services">
@@ -140,7 +145,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="pic"><img
-                                                    src="{{ asset('frontend/img/solutions_01.jpg') }}"
+                                                    src="{{ $solution_image }}"
                                                     class="img-fluid">
                                             </div>
                                         </div>
@@ -205,10 +210,17 @@
                     @foreach ($champions as $champion)
 
 
+                        @php
+                            if($champion->photo){
+                                $champion_image = $champion->photo->getUrl('preview2');
+                            }else{
+                                $champion_image = '';
+                            }
+                        @endphp
                         <li>
                             <div class="team_">
 
-                                <img src="{{ asset('frontend/img/team01.jpg') }}" />
+                                <img src="{{ $champion_image }}" />
                                 <h4>{{ $champion->name ?? '' }} </h4>
                                 <div class="jobtitle">
                                     {{ $champion->brief ?? '' }} </div>
@@ -251,9 +263,15 @@
 
                             <div class="medicalopinions">
                                 <div class="row">
-
+                                    @php
+                                        if($medicalOpinion->photo){
+                                            $medicalOpinions_image = $medicalOpinion->photo->getUrl('preview2');
+                                        }else{
+                                            $medicalOpinions_image = '';
+                                        }
+                                    @endphp
                                     <div class="col-md-2">
-                                        <div class="pic"><img src="{{ asset('frontend/img/medical01.jpg') }}"
+                                        <div class="pic"><img src="{{ $medicalOpinions_image }}"
                                                 class="img-fluid"></div>
                                     </div>
                                     <div class="col-md-8">
@@ -261,7 +279,8 @@
                                             <ul>
                                                 <li><i class="fas fa-pen-nib"></i> بقلم : د.
                                                     {{ $medicalOpinion->doctor->name ?? '' }} </li>
-                                                <li><i class="far fa-calendar"></i> {{ $medicalOpinion->created_at ?? '' }}
+                                                <li><i class="far fa-calendar"></i>
+                                                    {{ $medicalOpinion->created_at ?? '' }}
                                                 </li>
                                             </ul>
                                             <div class="clear"></div>

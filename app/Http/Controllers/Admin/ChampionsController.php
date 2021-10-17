@@ -57,13 +57,16 @@ class ChampionsController extends Controller
         }
 
         return redirect()->route('admin.champions.index');
-    }
+    } 
 
     public function edit(Champion $champion)
     {
-        abort_if(Gate::denies('champion_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('champion_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden'); 
 
-        $languages = Language::pluck('language', 'id');
+        $languages = Language::get()->map(function($language) use ($champion) {
+            $language->value = data_get($champion->languages->firstWhere('id', $language->id), 'pivot.rate') ?? null;
+            return $language;
+        });
 
         $champion->load('languages');
 
@@ -73,7 +76,7 @@ class ChampionsController extends Controller
     public function update(UpdateChampionRequest $request, Champion $champion)
     {
         $champion->update($request->all());
-        $champion->languages()->sync($request->input('languages', []));
+        $champion->languages()->sync($this->mapallang($request['languages']));
         if ($request->input('photo', false)) {
             if (!$champion->photo || $request->input('photo') !== $champion->photo->file_name) {
                 if ($champion->photo) {

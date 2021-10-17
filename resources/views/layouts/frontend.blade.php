@@ -80,7 +80,7 @@
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.flexisel.js') }}"></script>
 
 
-
+    @yield('styles')
 
 </head>
 

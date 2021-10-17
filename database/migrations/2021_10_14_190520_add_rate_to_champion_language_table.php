@@ -16,7 +16,7 @@ class AddRateToChampionLanguageTable extends Migration
         Schema::table('champion_language', function (Blueprint $table) {
 
             //
-            $table->string('rate');
+            $table->integer('rate');
         });
     }
 }

@@ -38,6 +38,7 @@ class MedicalOpinion extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+        $this->addMediaConversion('preview2')->fit('crop', 180, 180);
     }
 
     public function doctor()
@@ -52,6 +53,7 @@ class MedicalOpinion extends Model implements HasMedia
             $file->url       = $file->getUrl();
             $file->thumbnail = $file->getUrl('thumb');
             $file->preview   = $file->getUrl('preview');
+            $file->preview2   = $file->getUrl('preview2');
         }
 
         return $file;
