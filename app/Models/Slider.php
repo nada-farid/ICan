@@ -16,6 +16,12 @@ class Slider extends Model implements HasMedia
 
     public $table = 'sliders';
 
+    public const status = [
+        '0' => 'غير مفعلة ',
+        '1' => '  مفعلة',
+       
+    ];
+
     protected $appends = [
         'photo',
     ];

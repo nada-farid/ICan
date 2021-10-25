@@ -53,7 +53,8 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{ $slider->status ?? '' }}
+                                {{ App\Models\Slider::status[ $slider->status] ?? '' }}
+                             
                             </td>
                             <td>
                                 @can('slider_show')

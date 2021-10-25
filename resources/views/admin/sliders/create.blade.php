@@ -21,15 +21,20 @@
                 <span class="help-block">{{ trans('cruds.slider.fields.photo_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="status">{{ trans('cruds.slider.fields.status') }}</label>
-                <input class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" type="number" name="status" id="status" value="{{ old('status', '1') }}" step="1" required>
-                @if($errors->has('status'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('status') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.slider.fields.status_helper') }}</span>
-            </div>
+           <label class="required">{{ trans('cruds.slider.fields.status') }}</label>
+            <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
+                <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                @foreach(App\Models\Slider::status as $key => $label)
+                    <option value="{{ $key }}" {{ old('status', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                @endforeach
+            </select>
+            @if($errors->has('status'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('status') }}
+                </div>
+            @endif
+            <span class="help-block">{{ trans('cruds.slider.fields.status_helper') }}</span>
+        </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
