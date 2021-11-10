@@ -13,6 +13,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class ChampionsController extends Controller
 {
@@ -55,6 +56,8 @@ class ChampionsController extends Controller
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $champion->id]);
         }
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
 
         return redirect()->route('admin.champions.index');
     } 
@@ -115,6 +118,7 @@ class ChampionsController extends Controller
                 $champion->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('tournament_videos');
             }
         }
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
 
         return redirect()->route('admin.champions.index');
     }
@@ -133,6 +137,8 @@ class ChampionsController extends Controller
         abort_if(Gate::denies('champion_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $champion->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

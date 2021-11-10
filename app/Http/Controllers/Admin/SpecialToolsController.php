@@ -12,6 +12,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class SpecialToolsController extends Controller
 {
@@ -45,6 +46,8 @@ class SpecialToolsController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $specialTool->id]);
         }
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
+
         return redirect()->route('admin.special-tools.index');
     }
 
@@ -69,6 +72,7 @@ class SpecialToolsController extends Controller
         } elseif ($specialTool->photo) {
             $specialTool->photo->delete();
         }
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
 
         return redirect()->route('admin.special-tools.index');
     }
@@ -85,6 +89,8 @@ class SpecialToolsController extends Controller
         abort_if(Gate::denies('special_tool_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $specialTool->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

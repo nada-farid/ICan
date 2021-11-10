@@ -9,6 +9,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
+Use Alert;
 
 class ContactusController extends Controller
 {
@@ -64,6 +65,8 @@ class ContactusController extends Controller
         abort_if(Gate::denies('contactu_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $contactu->delete();
+        
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

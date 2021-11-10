@@ -10,6 +10,7 @@ use App\Models\Language;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class LanguagesController extends Controller
 {
@@ -33,6 +34,8 @@ class LanguagesController extends Controller
     {
         $language = Language::create($request->all());
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
+
         return redirect()->route('admin.languages.index');
     }
 
@@ -46,6 +49,8 @@ class LanguagesController extends Controller
     public function update(UpdateLanguageRequest $request, Language $language)
     {
         $language->update($request->all());
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
 
         return redirect()->route('admin.languages.index');
     }
@@ -62,6 +67,8 @@ class LanguagesController extends Controller
         abort_if(Gate::denies('language_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $language->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

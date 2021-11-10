@@ -12,6 +12,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class AboutUsController extends Controller
 {
@@ -43,6 +44,9 @@ class AboutUsController extends Controller
             $aboutUs->phote->delete();
         }
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
+
+
         return redirect()->route('admin.aboutuses.index');
     }
 
@@ -58,6 +62,8 @@ class AboutUsController extends Controller
         abort_if(Gate::denies('about_us_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $aboutUs->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

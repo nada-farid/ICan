@@ -12,6 +12,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class SliderController extends Controller
 {
@@ -45,6 +46,9 @@ class SliderController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $slider->id]);
         }
 
+        
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
+
         return redirect()->route('admin.sliders.index');
     }
 
@@ -73,6 +77,8 @@ class SliderController extends Controller
             }
         }
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
+
         return redirect()->route('admin.sliders.index');
     }
 
@@ -88,6 +94,8 @@ class SliderController extends Controller
         abort_if(Gate::denies('slider_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $slider->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

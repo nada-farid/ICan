@@ -12,6 +12,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class PracticalSolutionsController extends Controller
 {
@@ -52,6 +53,8 @@ class PracticalSolutionsController extends Controller
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $practicalSolution->id]);
         }
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
 
         return redirect()->route('admin.practical-solutions.index');
     }
@@ -102,6 +105,7 @@ class PracticalSolutionsController extends Controller
                 $practicalSolution->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photos');
             }
         }
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
 
         return redirect()->route('admin.practical-solutions.index');
     }
@@ -118,6 +122,8 @@ class PracticalSolutionsController extends Controller
         abort_if(Gate::denies('practical_solution_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $practicalSolution->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }

@@ -10,6 +10,7 @@ use App\Models\Problem;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class ProblemsController extends Controller
 {
@@ -33,6 +34,8 @@ class ProblemsController extends Controller
     {
         $problem = Problem::create($request->all());
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
+
         return redirect()->route('admin.problems.index');
     }
 
@@ -46,6 +49,8 @@ class ProblemsController extends Controller
     public function update(UpdateProblemRequest $request, Problem $problem)
     {
         $problem->update($request->all());
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
 
         return redirect()->route('admin.problems.index');
     }
@@ -63,6 +68,8 @@ class ProblemsController extends Controller
 
         $problem->delete();
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
+        
         return back();
     }
 

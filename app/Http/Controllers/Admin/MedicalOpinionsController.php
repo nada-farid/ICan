@@ -13,6 +13,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+Use Alert;
 
 class MedicalOpinionsController extends Controller
 {
@@ -48,6 +49,8 @@ class MedicalOpinionsController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $medicalOpinion->id]);
         }
 
+        Alert::success(trans('global.flash.success'), trans('global.flash.created'));
+
         return redirect()->route('admin.medical-opinions.index');
     }
 
@@ -76,7 +79,7 @@ class MedicalOpinionsController extends Controller
         } elseif ($medicalOpinion->photo) {
             $medicalOpinion->photo->delete();
         }
-
+        Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
         return redirect()->route('admin.medical-opinions.index');
     }
 
@@ -94,6 +97,8 @@ class MedicalOpinionsController extends Controller
         abort_if(Gate::denies('medical_opinion_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $medicalOpinion->delete();
+
+        Alert::success(trans('global.flash.success'), trans('global.flash.deleted'));
 
         return back();
     }
