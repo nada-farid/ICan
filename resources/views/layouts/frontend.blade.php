@@ -170,10 +170,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.about_us') }}"> من نحن </a>
                             </li>
-
+<!--
                             <li class="nav-item">
-                                <a class="nav-link" href="('frontend.have_proplem')"> عندي مشكلة</a>
+                                <a class="nav-link" href="//route('frontend.problem_view')}}"> عندي مشكلة</a>
                             </li>
+                        -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('frontend.posts')}}"> مناقشات عامة</a>
+                            </li>
+                        
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.practical_solutions') }}"> حلول
                                     عملية </a>
@@ -365,7 +370,7 @@
 
 
 
-
+@include('sweetalert::alert') 
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-center">
@@ -374,17 +379,28 @@
 
                     <div class="modal-body">
                         <div class="loginmodal-container text-center">
-                            <i class="fas fa-lock"></i>
-                            <h1>دخول المستخدمين </h1>
-                            <form>
-                                <input type="text" name="user" placeholder="اسم المستخدم">
-                                <input type="password" name="pass" placeholder="كلمة المرور">
-                                <input type="submit" name="login" class=" loginmodal-submit" value="دخول">
-                            </form>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+        
+                                                        <input type="text" name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}" placeholder="اسم المستخدم">
+                                                        
+                                                        @if($errors->has('email'))
+                                                        <div class="invalid-feedback">
+                                                            {{ $errors->first('email') }}
+                                                        </div>
+                                                    @endif
+                                                        <input type="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }}">
+                                                                    @if($errors->has('password'))
+                                                    <div class="invalid-feedback">
+                                                        {{ $errors->first('password') }}
+                                                    </div>
+                                                @endif
+                                                        <input type="submit" name="login" class=" loginmodal-submit" value="دخول">
+                                                    </form>
                             <div class="remmberme"> <input type="checkbox" value="lsRememberMe" id="rememberMe">
                                 <label for="rememberMe"> تذكرني </label></div>
                             <div class="login-help">
-                                <a href="#">مستخدم جديد</a> - <a href="#"> مساعدة </a>
+                                <a href={{ route('frontend.register') }}>مستخدم جديد</a>
                             </div>
 
                             <button type="button" class="btn default_button" data-dismiss="modal">إغــلاق</button>

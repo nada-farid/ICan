@@ -1,6 +1,6 @@
 <?php
 
-Route::redirect('/admin', '/login');
+Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -82,6 +82,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('staff/media', 'StaffController@storeMedia')->name('staff.storeMedia');
     Route::post('staff/ckmedia', 'StaffController@storeCKEditorImages')->name('staff.storeCKEditorImages');
     Route::resource('staff', 'StaffController');
+    // Public Subjects
+    Route::delete('public-subjects/destroy', 'PublicSubjectsController@massDestroy')->name('public-subjects.massDestroy');
+    Route::post('public-subjects/media', 'PublicSubjectsController@storeMedia')->name('public-subjects.storeMedia');
+    Route::post('public-subjects/ckmedia', 'PublicSubjectsController@storeCKEditorImages')->name('public-subjects.storeCKEditorImages');
+    Route::resource('public-subjects', 'PublicSubjectsController');
+
+    // Comments
+    Route::delete('comments/destroy', 'CommentsController@massDestroy')->name('comments.massDestroy');
+    Route::resource('comments', 'CommentsController');
 
     // Problems
     Route::delete('problems/destroy', 'ProblemsController@massDestroy')->name('problems.massDestroy');
@@ -108,12 +117,18 @@ Route::get('/about', 'AboutUsController@about')->name('frontend.about_us');
 Route::get('/PracticalSolution', 'PracticalSolutionsController@all')->name('frontend.practical_solutions');
 Route::get('/Show_PracticalSolution/{id}', 'PracticalSolutionsController@show')->name('frontend.practical_solution_show');
 Route::get('/medical_opinions', 'MedicalOpinionsController@opinions')->name('frontend.medical_opinions');
+Route::get('/posts', 'PostController@index')->name('frontend.posts');
+Route::get('/post_details/{post_id}', 'PostController@show')->name('frontend.post_details');
+Route::Post('/save_comment', 'PostController@StoreComment')->name('frontend.comment_store');
 Route::get('/champions', 'ChampionsController@champions')->name('frontend.champions');
 Route::get('/champion_single/{id}', 'ChampionsController@champion_single')->name('frontend.champion_single');
 Route::get('/tools', 'SpecialToolsController@tools')->name('frontend.tools');
 Route::get('/contact_us', 'ContactusController@contactus')->name('frontend.contactus');
-Route::Post('/contact_us/store', 'ContactusController@store')->name('frontend.contactus-store');
-Route::Post('/problems/store', 'ProblemsController@store')->name('frontend.problem');
+Route::get('/problems/view', 'ProblemsController@view')->name('frontend.problem_view');
+Route::Post('/contact_us/save', 'ContactusController@store')->name('frontend.contactus-store');
+Route::Post('/problems/save', 'ProblemsController@store')->name('frontend.problem');
+Route::get('/register', 'AuthController@register')->name('frontend.register');
+Route::Post('/register', 'AuthController@store')->name('frontend.register_save');
 
 
 });

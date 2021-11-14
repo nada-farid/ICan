@@ -224,7 +224,7 @@
                                 <h4>{{ $champion->name ?? '' }} </h4>
                                 <div class="jobtitle">
                                     {{ $champion->brief ?? '' }} </div>
-                                <div class="more"><span><a href="champion_single.html"> <i
+                                <div class="more"><span><a href="{{ route('frontend.champions') }}> <i
                                                 class="fas fa-plus-square"></i></a></span></div>
                             </div>
                         </li>

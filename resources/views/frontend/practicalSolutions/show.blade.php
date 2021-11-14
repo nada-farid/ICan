@@ -58,7 +58,9 @@
                 <div class="col-md-6">
                     <div class="video-container">
                         <video style="width:100%" controls>
+                            @if($practicalSolution->video)
                             <source src="{{ $practicalSolution->video->getUrl() }}" type="video">
+                                @endif
                         </video>
                     </div>
                 </div>

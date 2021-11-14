@@ -290,6 +290,50 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 71,
+                'title' => 'public_subject_create',
+            ],
+            [
+                'id'    => 72,
+                'title' => 'public_subject_edit',
+            ],
+            [
+                'id'    => 73,
+                'title' => 'public_subject_show',
+            ],
+            [
+                'id'    => 74,
+                'title' => 'public_subject_delete',
+            ],
+            [
+                'id'    => 75,
+                'title' => 'public_subject_access',
+            ],
+            [
+                'id'    => 76,
+                'title' => 'comment_create',
+            ],
+            [
+                'id'    => 77,
+                'title' => 'comment_edit',
+            ],
+            [
+                'id'    => 78,
+                'title' => 'comment_show',
+            ],
+            [
+                'id'    => 79,
+                'title' => 'comment_delete',
+            ],
+            [
+                'id'    => 80,
+                'title' => 'comment_access',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'general_discussion_access',
+            ],
+            [
+                'id'    => 82,
                 'title' => 'profile_password_edit',
             ],
         ];
