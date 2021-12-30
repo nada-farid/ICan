@@ -32,6 +32,7 @@ class StoreChampionRequest extends FormRequest
             ],
             'brief' => [
                 'required',
+                'max:255',
             ],
             'languages.*' => [
                 'integer',

@@ -21,10 +21,7 @@
 
                     <img src="{{$specialTool_img}}">
                     <h4> {{$specialTool->name ?? ''}}</h4>
-                    <div class="jobtitle">{{$specialTool->description ?? ''}}
-                        </div>
-                    <div class="more"><span><a href="champion_single.html"> <i
-                                    class="fas fa-plus-square"></i></a></span></div>
+                   <div class="more"><span><a href="{{route('frontend.tool_single',$specialTool->id)}}">  <i class="fas fa-plus-square"></i></a></span></div>
                 </div>
             </div>
 

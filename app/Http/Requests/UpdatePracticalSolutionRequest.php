@@ -11,7 +11,7 @@ class UpdatePracticalSolutionRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('practical_solution_edit');
+        return true;
     }
 
     public function rules()

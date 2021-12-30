@@ -33,12 +33,12 @@
                         </th>
                         <th>
                             {{ trans('cruds.practicalSolution.fields.photo') }}
+                        </th> 
+                        <th>
+                            {{ trans('cruds.practicalSolution.fields.user') }}
                         </th>
                         <th>
-                            {{ trans('cruds.practicalSolution.fields.video') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.practicalSolution.fields.photos') }}
+                            {{ trans('cruds.practicalSolution.fields.status') }}
                         </th>
                         <th>
                             &nbsp;
@@ -66,20 +66,12 @@
                                         <img src="{{ $practicalSolution->photo->getUrl('thumb') }}">
                                     </a>
                                 @endif
+                            </td> 
+                            <td>
+                                {{ $practicalSolution->user->name ?? '' }}
                             </td>
                             <td>
-                                @if($practicalSolution->video)
-                                    <a href="{{ $practicalSolution->video->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                @foreach($practicalSolution->photos as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
+                                {{ App\Models\PracticalSolution::STATUS_SELECT[$practicalSolution->status] ?? '' }}
                             </td>
                             <td>
                                 @can('practical_solution_show')

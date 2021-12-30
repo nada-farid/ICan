@@ -75,6 +75,22 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.practicalSolution.fields.user') }}
+                        </th>
+                        <td>
+                            {{ $practicalSolution->user->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.practicalSolution.fields.status') }}
+                        </th>
+                        <td>
+                            {{ App\Models\PracticalSolution::STATUS_SELECT[$practicalSolution->status] ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

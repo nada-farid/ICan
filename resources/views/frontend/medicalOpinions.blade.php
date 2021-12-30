@@ -4,6 +4,7 @@
     <div class="medical">
 
         <div class="container">
+            <h2 class="text-center mb-8">أراء المختصون</h2><br/>
             @foreach ($medicalOpinions as $medicalOpinion)
             @php
             if($medicalOpinion->photo){
@@ -35,10 +36,7 @@
                                         <p>{{ $medicalOpinion->opinion ?? '' }}</p>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="more"><button class="btn-more"> <a
-                                                href="medical_single.html"> المزيد </a> </button></div>
-                                </div>
+                        
 
                             </div>
                         </div>

@@ -151,7 +151,7 @@
                                         </div>
                                         <div class="col-md-8">
 
-                                            <div class="details"> <a href="practical_solutions.html">
+                                            <div class="details"> <a href="{{ route('frontend.practical_solution_show', $solution->id) }}">
                                                     <h5>{{ $solution->title ?? '' }} </h5>
                                                 </a>
                                                 <p>{{ $solution->description ?? '' }} </p>
@@ -222,10 +222,9 @@
 
                                 <img src="{{ $champion_image }}" />
                                 <h4>{{ $champion->name ?? '' }} </h4>
-                                <div class="jobtitle">
-                                    {{ $champion->brief ?? '' }} </div>
-                                <div class="more"><span><a href="champion_single.html"> <i
-                                                class="fas fa-plus-square"></i></a></span></div>
+                             <div class="more"><span><a
+                                        href="{{ route('frontend.champion_single', $champion->id) }}"> <i
+                                            class="fas fa-plus-square"></i></a></span></div>
                             </div>
                         </li>
                     @endforeach
@@ -277,7 +276,7 @@
                                     <div class="col-md-8">
                                         <div class="details">
                                             <ul>
-                                                <li><i class="fas fa-pen-nib"></i> بقلم : د.
+                                                <li><i class="fas fa-pen-nib"></i> بقلم:
                                                     {{ $medicalOpinion->doctor->name ?? '' }} </li>
                                                 <li><i class="far fa-calendar"></i>
                                                     {{ $medicalOpinion->created_at ?? '' }}
@@ -287,12 +286,7 @@
                                             <p>{{ $medicalOpinion->opinion ?? '' }}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="more"><button class="btn-more"> <a
-                                                    href="medical_single.html"> المزيد </a> </button></div>
-                                    </div>
-
-                                </div>
+                                
                             </div>
                         </div>
 
@@ -314,6 +308,7 @@
             </div>
 
         </div>
+    </div>
     </div>
 
 

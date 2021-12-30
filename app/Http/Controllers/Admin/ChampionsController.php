@@ -13,7 +13,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
-Use Alert;
+use Alert;
 
 class ChampionsController extends Controller
 {
@@ -118,6 +118,7 @@ class ChampionsController extends Controller
                 $champion->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('tournament_videos');
             }
         }
+
         Alert::success(trans('global.flash.success'), trans('global.flash.updated'));
 
         return redirect()->route('admin.champions.index');

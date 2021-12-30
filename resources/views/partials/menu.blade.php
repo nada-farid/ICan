@@ -137,6 +137,58 @@
                 </a>
             </li>
         @endcan
+        @can('general_discussion_access')
+        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/public-subjects*") ? "c-show" : "" }} {{ request()->is("admin/comments*") ? "c-show" : "" }}">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="fa-fw fas fa-user-edit c-sidebar-nav-icon">
+
+                </i>
+                {{ trans('cruds.generalDiscussion.title') }}
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                @can('subjects_category_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.subjects-categories.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/subjects-categories") || request()->is("admin/subjects-categories/*") ? "c-active" : "" }}">
+                            <i class="fa-fw fas fa-book c-sidebar-nav-icon">
+
+                            </i>
+                            {{ trans('cruds.subjectsCategory.title') }}
+                        </a>
+                    </li>
+                @endcan
+                @can('public_subject_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.public-subjects.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/public-subjects") || request()->is("admin/public-subjects/*") ? "c-active" : "" }}">
+                            <i class="fa-fw fas fa-edit c-sidebar-nav-icon">
+
+                            </i>
+                            {{ trans('cruds.publicSubject.title') }}
+                        </a>
+                    </li>
+                @endcan
+                @can('comment_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.comments.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/comments") || request()->is("admin/comments/*") ? "c-active" : "" }}">
+                            <i class="fa-fw far fa-comment-alt c-sidebar-nav-icon">
+
+                            </i>
+                            {{ trans('cruds.comment.title') }}
+                        </a>
+                    </li>
+                @endcan
+            </ul>
+        </li>
+    @endcan
+    @can('videos_participate_access')
+        <li class="c-sidebar-nav-item">
+            <a href="{{ route("admin.videos-participates.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/videos-participates") || request()->is("admin/videos-participates/*") ? "c-active" : "" }}">
+                <i class="fa-fw fab fa-youtube c-sidebar-nav-icon">
+
+                </i>
+                {{ trans('cruds.videosParticipate.title') }}
+            </a>
+        </li>
+    @endcan
         @can('setting_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/sliders*") ? "c-show" : "" }} {{ request()->is("admin/aboutuses*") ? "c-show" : "" }} {{ request()->is("admin/languages*") ? "c-show" : "" }} {{ request()->is("admin/contactus*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">

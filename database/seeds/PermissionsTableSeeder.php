@@ -290,6 +290,90 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 71,
+                'title' => 'public_subject_create',
+            ],
+            [
+                'id'    => 72,
+                'title' => 'public_subject_edit',
+            ],
+            [
+                'id'    => 73,
+                'title' => 'public_subject_show',
+            ],
+            [
+                'id'    => 74,
+                'title' => 'public_subject_delete',
+            ],
+            [
+                'id'    => 75,
+                'title' => 'public_subject_access',
+            ],
+            [
+                'id'    => 76,
+                'title' => 'comment_create',
+            ],
+            [
+                'id'    => 77,
+                'title' => 'comment_edit',
+            ],
+            [
+                'id'    => 78,
+                'title' => 'comment_show',
+            ],
+            [
+                'id'    => 79,
+                'title' => 'comment_delete',
+            ],
+            [
+                'id'    => 80,
+                'title' => 'comment_access',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'general_discussion_access',
+            ],
+            [
+                'id'    => 82,
+                'title' => 'subjects_category_create',
+            ],
+            [
+                'id'    => 83,
+                'title' => 'subjects_category_edit',
+            ],
+            [
+                'id'    => 84,
+                'title' => 'subjects_category_show',
+            ],
+            [
+                'id'    => 85,
+                'title' => 'subjects_category_delete',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'subjects_category_access',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'videos_participate_create',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'videos_participate_edit',
+            ],
+            [
+                'id'    => 89,
+                'title' => 'videos_participate_show',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'videos_participate_delete',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'videos_participate_access',
+            ],
+            [
+                'id'    => 92,
                 'title' => 'profile_password_edit',
             ],
         ];

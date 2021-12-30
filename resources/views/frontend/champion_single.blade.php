@@ -6,13 +6,13 @@
 
             <div class="row">
                 <div class="col-md-3">
-                  @php
-                      if($champion->photo){
-                          $champion_image = $champion->photo->getUrl('preview2');
-                      }else{
-                          $champion_image = '';
-                      }
-                  @endphp
+                    @php
+                        if ($champion->photo) {
+                            $champion_image = $champion->photo->getUrl('preview2');
+                        } else {
+                            $champion_image = '';
+                        }
+                    @endphp
                     <img src="{{ $champion_image }}" class="img-fluid rounded-circle">
                 </div>
                 <div class="col-md-9">
@@ -75,53 +75,78 @@
 
                         <div class="row " style="padding: 40px; background: #faf9fb;">
 
-                            @foreach($champion->tournament_videos as $key => $media)
-                              <div class="col-md-4">
-                                  <div class="video-container">
-                                    <video style="width:100%" controls>
-                                        <source src="{{ $media->getUrl() }}" type="video">
-                                    </video>
-                                  </div>
-                              </div> 
+                            @foreach ($champion->tournament_videos as $key => $media)
+                                <div class="col-md-4">
+                                    <div class="video-container">
+                                        <video style="width:100%" controls>
+                                            <source src="{{ $media->getUrl() }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
                             @endforeach
                         </div>
 
 
 
                         <br /><br />
+
+                        <h2>فيديوهـــــات أخرى</h2>
+                        <hr />
+            
+                        <div class="row" style="padding: 40px; background: #faf9fb"> 
+                            @foreach($champion->championVideosParticipates()->where('status','accepted')->get() as $video)
+                                <div class="col-md-4">
+                                    <div class="video-container"> 
+                                        @if($video->type == 'upload_video')
+                                            <video style="width:100%" controls>
+                                                @if($video->video)
+                                                    <source src="{{ $video->video->getUrl() }}" type="video/mp4">
+                                                @endif
+                                            </video>
+                                        @elseif($video->type == 'youtube')
+                                            <?php echo $video->embed_code; ?>  
+                                        @endif
+                                    </div>
+                                </div> 
+                            @endforeach
+                        </div>
                         <h2>صور أخرى </h2>
+                        
                         <hr />
                         <section id="gallery" style="direction: ltr; ">
                             <div class="container">
                                 <div id="image-gallery">
-                                    <div class="row"> 
-                                        @foreach($champion->tournament_photo as $key => $media)
-                                          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 image">
-                                              <div class="img-wrapper">
-                                                  <a href="{{ $media->getUrl() }}"><img src={{ $media->getUrl('preview2') }}
-                                                          class="img-responsive"></a>
-                                                  <div class="img-overlay">
-                                                      <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                    <div class="row">
+                                        @foreach ($champion->tournament_photo as $key => $media)
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 image">
+                                                <div class="img-wrapper">
+                                                    <a href="{{ $media->getUrl() }}"><img
+                                                            src={{ $media->getUrl('preview2') }}
+                                                            class="img-responsive"></a>
+                                                    <div class="img-overlay">
+                                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                                    </div>
+
+                                                </div>
                                         @endforeach
 
-                                    </div><!-- End row -->
-                                </div><!-- End image gallery -->
-                            </div><!-- End container -->
+                                    </div>
                         </section>
+                    </div><!-- End row -->
+                </div><!-- End image gallery -->
+            </div><!-- End container -->
 
 
-                    </div>
-
-
-                </div>
-
-
-
-            </div>
         </div>
 
 
-    @endsection
+    </div>
+
+
+
+    </div>
+    </div>
+    </div>
+
+
+@endsection

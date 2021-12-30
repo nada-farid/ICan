@@ -17,12 +17,11 @@
                 }
             @endphp
 
-                    <div class="col-md-3">
-                        <div class="team_ border-bottom">
+                    <div class="col-md-3" >
+                        <div class="team_ border-bottom" >
 
                             <img src="{{ $champion_img}}" />
                             <h4> {{ $champion->name ?? '' }}</h4>
-                            <div class="jobtitle">{{ $champion->brief ?? '' }} </div>
                             <div class="more"><span><a
                                         href="{{ route('frontend.champion_single', $champion->id) }}"> <i
                                             class="fas fa-plus-square"></i></a></span></div>

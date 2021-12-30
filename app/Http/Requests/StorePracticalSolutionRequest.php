@@ -11,7 +11,7 @@ class StorePracticalSolutionRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('practical_solution_create');
+        return true;
     }
 
     public function rules()

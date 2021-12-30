@@ -1,6 +1,6 @@
 <?php
 
-Route::redirect('/admin', '/login');
+Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -11,7 +11,7 @@ Route::get('/home', function () {
 
 Auth::routes(['register' => false]);
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth','staff']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
@@ -82,11 +82,31 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('staff/media', 'StaffController@storeMedia')->name('staff.storeMedia');
     Route::post('staff/ckmedia', 'StaffController@storeCKEditorImages')->name('staff.storeCKEditorImages');
     Route::resource('staff', 'StaffController');
+    // Public Subjects
+    Route::delete('public-subjects/destroy', 'PublicSubjectsController@massDestroy')->name('public-subjects.massDestroy');
+    Route::post('public-subjects/media', 'PublicSubjectsController@storeMedia')->name('public-subjects.storeMedia');
+    Route::post('public-subjects/ckmedia', 'PublicSubjectsController@storeCKEditorImages')->name('public-subjects.storeCKEditorImages');
+    Route::resource('public-subjects', 'PublicSubjectsController');
+
+    // Comments
+    Route::delete('comments/destroy', 'CommentsController@massDestroy')->name('comments.massDestroy');
+    Route::resource('comments', 'CommentsController');
+
+    // Subjects Categories
+    Route::delete('subjects-categories/destroy', 'SubjectsCategoriesController@massDestroy')->name('subjects-categories.massDestroy');
+    Route::resource('subjects-categories', 'SubjectsCategoriesController');
 
     // Problems
     Route::delete('problems/destroy', 'ProblemsController@massDestroy')->name('problems.massDestroy');
     Route::resource('problems', 'ProblemsController');
 
+    // Videos Participate
+    Route::delete('videos-participates/destroy', 'VideosParticipateController@massDestroy')->name('videos-participates.massDestroy');
+    Route::post('videos-participates/media', 'VideosParticipateController@storeMedia')->name('videos-participates.storeMedia');
+    Route::post('videos-participates/ckmedia', 'VideosParticipateController@storeCKEditorImages')->name('videos-participates.storeCKEditorImages');
+    Route::resource('videos-participates', 'VideosParticipateController');
+
+    
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -101,19 +121,46 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 //frontend
 Route::group([ 'namespace' => 'Frontend'], function () {
 
-Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/about', 'AboutUsController@about')->name('frontend.about_us');
+    Route::get('/user/profile','HomeController@profile')->name('frontend.profile');
+    Route::get('/user/profile_solves','HomeController@profile_solves')->name('frontend.profile_solves');
+    Route::get('/user/profile_videos','HomeController@profile_videos')->name('frontend.profile_videos');
 
-Route::get('/PracticalSolution', 'PracticalSolutionsController@all')->name('frontend.practical_solutions');
-Route::get('/Show_PracticalSolution/{id}', 'PracticalSolutionsController@show')->name('frontend.practical_solution_show');
-Route::get('/medical_opinions', 'MedicalOpinionsController@opinions')->name('frontend.medical_opinions');
-Route::get('/champions', 'ChampionsController@champions')->name('frontend.champions');
-Route::get('/champion_single/{id}', 'ChampionsController@champion_single')->name('frontend.champion_single');
-Route::get('/tools', 'SpecialToolsController@tools')->name('frontend.tools');
-Route::get('/contact_us', 'ContactusController@contactus')->name('frontend.contactus');
-Route::Post('/contact_us/store', 'ContactusController@store')->name('frontend.contactus-store');
-Route::Post('/problems/store', 'ProblemsController@store')->name('frontend.problem');
+    Route::get('/about', 'AboutUsController@about')->name('frontend.about_us');
+
+    Route::get('/PracticalSolution', 'PracticalSolutionsController@all')->name('frontend.practical_solutions');
+    Route::get('/Show_PracticalSolution/{id}', 'PracticalSolutionsController@show')->name('frontend.practical_solution_show');
+    Route::get('/medical_opinions', 'MedicalOpinionsController@opinions')->name('frontend.medical_opinions');
+    Route::get('/categories', 'PostController@index')->name('frontend.posts_categories');
+    Route::get('/posts/{id}', 'PostController@posts')->name('frontend.posts');
+    Route::get('/post_details/{post_id}', 'PostController@show')->name('frontend.post_details');
+    Route::Post('/save_comment', 'PostController@StoreComment')->name('frontend.comment_store');
+    Route::get('/champions', 'ChampionsController@champions')->name('frontend.champions');
+    Route::get('/champion_single/{id}', 'ChampionsController@champion_single')->name('frontend.champion_single');
+    Route::get('/tools', 'SpecialToolsController@tools')->name('frontend.tools');
+    Route::get('/tool_detalis/{tool_id}', 'SpecialToolsController@show')->name('frontend.tool_single');
+
+    Route::get('/contact_us', 'ContactusController@contactus')->name('frontend.contactus');
+    Route::get('/problems/view', 'ProblemsController@view')->name('frontend.problem_view');
+    Route::Post('/contact_us/save', 'ContactusController@store')->name('frontend.contactus-store');
+    Route::Post('/problems/save', 'ProblemsController@store')->name('frontend.problem');
+    Route::get('/register', 'AuthController@register')->name('frontend.register');
+    Route::Post('/register', 'AuthController@store')->name('frontend.register_save');
+
+    Route::post('/frontend/practical-solutions/media', 'PracticalSolutionsController@storeMedia')->name('frontend.practical-solutions.storeMedia');
+    Route::post('/frontend/practical-solutions/ckmedia', 'PracticalSolutionsController@storeCKEditorImages')->name('frontend.practical-solutions.storeCKEditorImages'); 
+    Route::post('practical-solutions/store', 'PracticalSolutionsController@store')->name('practical-solutions.store');
+    Route::post('practical-solutions/edit', 'PracticalSolutionsController@edit')->name('practical-solutions.edit');
+    Route::put('practical-solutions/update/{practicalSolution}', 'PracticalSolutionsController@update')->name('practical-solutions.update');
+    Route::delete('practical-solutions/destroy/{practicalSolution}', 'PracticalSolutionsController@destroy')->name('practical-solutions.destroy');
+
+    Route::post('videos-participates/media', 'VideosParticipateController@storeMedia')->name('frontend.videos-participates.storeMedia');
+    Route::post('videos-participates/ckmedia', 'VideosParticipateController@storeCKEditorImages')->name('frontend.videos-participates.storeCKEditorImages');
+    Route::post('videos-participates/store', 'VideosParticipateController@store')->name('videos-participates.store');
+    Route::post('videos-participates/edit', 'VideosParticipateController@edit')->name('videos-participates.edit');
+    Route::put('videos-participates/update/{videosParticipate}', 'VideosParticipateController@update')->name('videos-participates.update');
+    Route::delete('videos-participates/destroy/{videosParticipate}', 'VideosParticipateController@destroy')->name('videos-participates.destroy');
 
 
 });

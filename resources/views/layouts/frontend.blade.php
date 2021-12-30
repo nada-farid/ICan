@@ -46,7 +46,7 @@
                 'delay': 5000,
                 'animationSpeed': 2000,
                 'showNextPrev': true,
-                'showPlayButton': true,
+                'showPlayButton': false,
                 'autoSlide': true,
                 'animationType': 'sliding'
             });
@@ -79,6 +79,8 @@
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.flexisel.js') }}"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 
     @yield('styles')
 
@@ -92,11 +94,12 @@
                 <div class="col-md-7">
                     <div class="contact-head">
                         @php
-                        
-                        $about= \App\Models\AboutUs::first();
-
+                            
+                            $about = \App\Models\AboutUs::first();
+                            
                         @endphp
-                        <a href="tel:22408681"> <i class="fab fa-whatsapp"></i> <span>{{ $about->phone_1 ?? '' }}</span>
+                        <a href="tel:22408681"> <i class="fab fa-whatsapp"></i>
+                            <span>{{ $about->phone_1 ?? '' }}</span>
                         </a>
 
                         <a href="mailto:info@ican.com"> <i class="far fa-envelope"></i>
@@ -135,15 +138,28 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="logo"><a href="#"> <img src="{{ asset('frontend/img/logo.png') }}"></a></div>
+                    <div class="logo"><a href="#"> <img src="{{ asset('frontend/img/logo.png') }}"></a>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
-
+                    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                     <div class="header_actions">
-                        <li class="login"> <a href="#" data-toggle="modal" data-target="#login-modal"> <i
-                                    class="far fa-user"></i> تسجيل الدخول </a> </li>
+                        <li class="login">
+                            @auth
+                                <i class="far fa-user"></i> <a href="#" class="c-sidebar-nav-link"
+                                    onclick="event.preventDefault(); document.getElementById('logoutform').submit();"> تسجيل
+                                    الخروج </a>
+                            </li>
+                            <li class="proplem_quick" style="background:cornflowerblue"><a
+                                    href="{{ route('frontend.profile') }}">{{ auth()->user()->name ?? '' }} </a></li>
+                        @else
 
+                            <a href="#" data-toggle="modal" data-target="#login-modal"> <i class="far fa-user"></i> تسجيل
+                                الدخول </a> </li>
+                        @endauth
                         <li class="proplem_quick"><a data-popup-open="popup-4" href="#"> <i
                                     class="fas fa-heart-broken"></i> عندي مشكلة </a></li>
 
@@ -168,16 +184,20 @@
                                 <a class="nav-link" href="{{ route('home') }}">الرئيسية</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.about_us') }}"> من نحن </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="('frontend.have_proplem')"> عندي مشكلة</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.practical_solutions') }}"> حلول
                                     عملية </a>
                             </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('frontend.tools') }}"> ادوات والات خاصة </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('frontend.posts_categories') }}"> مناقشات
+                                    عامة</a>
+                            </li>
+
 
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.medical_opinions') }}"> اراء طبية
@@ -186,12 +206,12 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link"   href="{{ route('frontend.champions') }}"> ابطال استطاعوا </a>
+                                <a class="nav-link" href="{{ route('frontend.champions') }}"> ابطال استطاعوا
+                                </a>
                             </li>
 
-
                             <li class="nav-item">
-                                <a class="nav-link"  href="{{ route('frontend.tools') }}"> ادوات والات خاصة </a>
+                                <a class="nav-link" href="{{ route('frontend.about_us') }}"> من نحن </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.contactus') }}">تـواصل معنا </a>
@@ -262,7 +282,7 @@
             <div class="loginmodal-container text-center">
                 <i class="fas fa-heart-broken" aria-hidden="true"></i>
                 <h1>عندي مشكلة </h1>
-                <form  action="{{route('frontend.problem')}}" method="POST">
+                <form action="{{ route('frontend.problem') }}" method="POST">
                     @csrf
                     <input type="text" name="title" placeholder="عنوان ">
                     <input type="text" name="email" placeholder="البريد الإلكتروني ">
@@ -365,7 +385,7 @@
 
 
 
-
+    @include('sweetalert::alert')
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-center">
@@ -374,17 +394,34 @@
 
                     <div class="modal-body">
                         <div class="loginmodal-container text-center">
-                            <i class="fas fa-lock"></i>
-                            <h1>دخول المستخدمين </h1>
-                            <form>
-                                <input type="text" name="user" placeholder="اسم المستخدم">
-                                <input type="password" name="pass" placeholder="كلمة المرور">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+
+                                <input type="text" name="email" type="text"
+                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required
+                                    autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}"
+                                    value="{{ old('email', null) }}" placeholder="اسم المستخدم">
+
+                                @if ($errors->has('email'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('email') }}
+                                    </div>
+                                @endif
+                                <input type="password" name="password" type="password"
+                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required
+                                    placeholder="{{ trans('global.login_password') }}">
+                                @if ($errors->has('password'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('password') }}
+                                    </div>
+                                @endif
                                 <input type="submit" name="login" class=" loginmodal-submit" value="دخول">
                             </form>
                             <div class="remmberme"> <input type="checkbox" value="lsRememberMe" id="rememberMe">
-                                <label for="rememberMe"> تذكرني </label></div>
+                                <label for="rememberMe"> تذكرني </label>
+                            </div>
                             <div class="login-help">
-                                <a href="#">مستخدم جديد</a> - <a href="#"> مساعدة </a>
+                                <a href={{ route('frontend.register') }}>مستخدم جديد</a>
                             </div>
 
                             <button type="button" class="btn default_button" data-dismiss="modal">إغــلاق</button>
@@ -396,6 +433,9 @@
             </div>
         </div>
     </div>
+
+
+    @yield('scripts')
 </body>
 
 </html>

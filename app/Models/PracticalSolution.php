@@ -16,6 +16,12 @@ class PracticalSolution extends Model implements HasMedia
 
     public $table = 'practical_solutions';
 
+    public const STATUS_SELECT = [
+        'pending'  => 'قيد الأنتظار',
+        'accepted' => 'مقبول',
+        'refused'  => 'مرفوض',
+    ];
+
     protected $appends = [
         'photo',
         'video',
@@ -31,6 +37,8 @@ class PracticalSolution extends Model implements HasMedia
     protected $fillable = [
         'title',
         'description',
+        'status',
+        'user_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -43,6 +51,11 @@ class PracticalSolution extends Model implements HasMedia
         $this->addMediaConversion('preview2')->fit('crop', 180, 180);
     }
 
+    public function practicalSolutionVideosParticipates()
+    {
+        return $this->hasMany(VideosParticipate::class, 'practical_solution_id', 'id');
+    }
+    
     public function getPhotoAttribute()
     {
         $file = $this->getMedia('photo')->last();
@@ -71,6 +84,11 @@ class PracticalSolution extends Model implements HasMedia
         });
 
         return $files;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

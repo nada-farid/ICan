@@ -37,7 +37,7 @@
                     }
                 @endphp
                 <div class="col-md-3">
-                    <img src="{{ $practicalSolution }}" class="img-fluid">
+                    <img src="{{$practicalSolution_image}}" class="img-fluid">
                 </div>
                 <div class="col-md-9">
                     <div class="text">
@@ -58,12 +58,35 @@
                 <div class="col-md-6">
                     <div class="video-container">
                         <video style="width:100%" controls>
-                            <source src="{{ $practicalSolution->video->getUrl() }}" type="video">
+                            @if($practicalSolution->video)
+                            <source src="{{ $practicalSolution->video->getUrl() }}" type="video/mp4">
+                                @endif
                         </video>
                     </div>
                 </div>
 
                 <div class="col-md-3"></div>
+            </div>
+
+            <h2>فيديوهـــــات أخرى</h2>
+            <hr />
+
+            <div class="row" style="padding: 40px; background: #faf9fb"> 
+                @foreach($practicalSolution->practicalSolutionVideosParticipates()->where('status','accepted')->get() as $video)
+                    <div class="col-md-4">
+                        <div class="video-container"> 
+                            @if($video->type == 'upload_video')
+                                <video style="width:100%" controls>
+                                    @if($video->video)
+                                        <source src="{{ $video->video->getUrl() }}" type="video/mp4">
+                                    @endif
+                                </video>
+                            @elseif($video->type == 'youtube')
+                                <?php echo $video->embed_code; ?>  
+                            @endif
+                        </div>
+                    </div> 
+                @endforeach
             </div>
 
             <br /><br />

@@ -58,6 +58,11 @@ class Champion extends Model implements HasMedia
         $this->addMediaConversion('preview2')->fit('crop', 180, 180);
     }
 
+    public function championVideosParticipates()
+    {
+        return $this->hasMany(VideosParticipate::class, 'champion_id', 'id');
+    }
+    
     public function getPhotoAttribute()
     {
         $file = $this->getMedia('photo')->last();
