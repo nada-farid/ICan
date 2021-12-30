@@ -146,7 +146,6 @@
                 {{ trans('cruds.generalDiscussion.title') }}
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
-<<<<<<< HEAD
                 @can('subjects_category_access')
                     <li class="c-sidebar-nav-item">
                         <a href="{{ route("admin.subjects-categories.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/subjects-categories") || request()->is("admin/subjects-categories/*") ? "c-active" : "" }}">
@@ -157,8 +156,6 @@
                         </a>
                     </li>
                 @endcan
-=======
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                 @can('public_subject_access')
                     <li class="c-sidebar-nav-item">
                         <a href="{{ route("admin.public-subjects.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/public-subjects") || request()->is("admin/public-subjects/*") ? "c-active" : "" }}">
@@ -182,7 +179,6 @@
             </ul>
         </li>
     @endcan
-<<<<<<< HEAD
     @can('videos_participate_access')
         <li class="c-sidebar-nav-item">
             <a href="{{ route("admin.videos-participates.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/videos-participates") || request()->is("admin/videos-participates/*") ? "c-active" : "" }}">
@@ -193,8 +189,6 @@
             </a>
         </li>
     @endcan
-=======
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
         @can('setting_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/sliders*") ? "c-show" : "" }} {{ request()->is("admin/aboutuses*") ? "c-show" : "" }} {{ request()->is("admin/languages*") ? "c-show" : "" }} {{ request()->is("admin/contactus*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">

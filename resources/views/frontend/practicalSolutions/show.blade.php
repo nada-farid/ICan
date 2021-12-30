@@ -59,11 +59,7 @@
                     <div class="video-container">
                         <video style="width:100%" controls>
                             @if($practicalSolution->video)
-<<<<<<< HEAD
                             <source src="{{ $practicalSolution->video->getUrl() }}" type="video/mp4">
-=======
-                            <source src="{{ $practicalSolution->video->getUrl() }}" type="video">
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                                 @endif
                         </video>
                     </div>

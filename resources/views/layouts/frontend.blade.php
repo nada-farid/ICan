@@ -187,24 +187,12 @@
                                 <a class="nav-link" href="{{ route('frontend.practical_solutions') }}"> حلول
                                     عملية </a>
                             </li>
-<<<<<<< HEAD
 
 
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.tools') }}"> ادوات والات خاصة </a>
                             </li>
 
-=======
-<!--
-                            <li class="nav-item">
-                                <a class="nav-link" href="//route('frontend.problem_view')}}"> عندي مشكلة</a>
-                            </li>
-                        -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('frontend.posts')}}"> مناقشات عامة</a>
-                            </li>
-                        
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.posts_categories') }}"> مناقشات
                                     عامة</a>
@@ -397,11 +385,7 @@
 
 
 
-<<<<<<< HEAD
     @include('sweetalert::alert')
-=======
-@include('sweetalert::alert') 
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-center">
@@ -412,7 +396,6 @@
                         <div class="loginmodal-container text-center">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-<<<<<<< HEAD
 
                                 <input type="text" name="email" type="text"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required
@@ -434,24 +417,6 @@
                                 @endif
                                 <input type="submit" name="login" class=" loginmodal-submit" value="دخول">
                             </form>
-=======
-        
-                                                        <input type="text" name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}" placeholder="اسم المستخدم">
-                                                        
-                                                        @if($errors->has('email'))
-                                                        <div class="invalid-feedback">
-                                                            {{ $errors->first('email') }}
-                                                        </div>
-                                                    @endif
-                                                        <input type="password" name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }}">
-                                                                    @if($errors->has('password'))
-                                                    <div class="invalid-feedback">
-                                                        {{ $errors->first('password') }}
-                                                    </div>
-                                                @endif
-                                                        <input type="submit" name="login" class=" loginmodal-submit" value="دخول">
-                                                    </form>
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                             <div class="remmberme"> <input type="checkbox" value="lsRememberMe" id="rememberMe">
                                 <label for="rememberMe"> تذكرني </label>
                             </div>

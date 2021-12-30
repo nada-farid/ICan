@@ -222,16 +222,9 @@
 
                                 <img src="{{ $champion_image }}" />
                                 <h4>{{ $champion->name ?? '' }} </h4>
-<<<<<<< HEAD
                              <div class="more"><span><a
                                         href="{{ route('frontend.champion_single', $champion->id) }}"> <i
                                             class="fas fa-plus-square"></i></a></span></div>
-=======
-                                <div class="jobtitle">
-                                    {{ $champion->brief ?? '' }} </div>
-                                <div class="more"><span><a href="{{ route('frontend.champions') }}> <i
-                                                class="fas fa-plus-square"></i></a></span></div>
->>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                             </div>
                         </li>
                     @endforeach
