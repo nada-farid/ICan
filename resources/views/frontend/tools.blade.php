@@ -21,7 +21,12 @@
 
                     <img src="{{$specialTool_img}}">
                     <h4> {{$specialTool->name ?? ''}}</h4>
+<<<<<<< HEAD
                    <div class="more"><span><a href="{{route('frontend.tool_single',$specialTool->id)}}">  <i class="fas fa-plus-square"></i></a></span></div>
+=======
+                    <div class="jobtitle">{{$specialTool->description ?? ''}}
+                        </div>
+>>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                 </div>
             </div>
 

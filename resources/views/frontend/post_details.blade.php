@@ -55,13 +55,21 @@
                                 </div>
                                 <div class="clearfix float-right">
                                     
+<<<<<<< HEAD
                                @auth
+=======
+                               @if (!Auth::guest())
+>>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                                    <button type="submit" class="btn-primary"><i class="fas fa-plus" aria-hidden="true"></i>
                                     إرسال </a></button>
                                     @else
                                     <a a href="#" data-toggle="modal" data-target="#login-modal" class="btn-primary"><i class="fas fa-plus" aria-hidden="true"></i>
                                         إرسال </a>
+<<<<<<< HEAD
                                         @endauth
+=======
+                                        @endif
+>>>>>>> 35d7b4305d81e7310d1a18723387e692ff4a91d9
                             </form>
                         </div>
                     </article>
