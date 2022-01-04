@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-md-8">
 
-                                        <div class="details"> <a href="practical_solutions.html">
+                                        <div class="details"> <a  href="{{ route('frontend.practical_solution_show', $practicalSolution->id) }}">
                                                 <h5>{{ $practicalSolution->title }} </h5>
                                             </a>
                                             <p>{{ $practicalSolution->description }} </p>

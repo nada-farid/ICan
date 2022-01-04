@@ -18,7 +18,7 @@
                     <article>
                         <img src="img/photo-1455734729978-db1ae4f687fc.jpg" alt="" class="img-fluid mb30">
                         <div class="post-content">
-                            <h3>عنوان الموضوع</h3>
+                            <h3>{{ $post->title ?? '' }}</h3>
                             <ul class="post-meta list-inline">
                                 <li class="list-inline-item">
                                     <i class="fa fa-user-circle-o"></i> {{ $post->writer_name ?? '' }}
@@ -27,7 +27,7 @@
                                     <i class="fa fa-calendar-o"></i> {{ $post->created_at->format('d-m-y') ?? '' }}
                                 </li>
                                 <li class="list-inline-item">
-                                    <i class="fa fa-tags"></i> {{ $post->title ?? '' }}
+                                    <i class="fa fa-tags"></i> 
                                 </li>
                             </ul>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -41,14 +41,17 @@
                             @foreach ($post->postComments as $comment)
                                 <div class="media mb40">
                                      @php
-                                if(Auth::user()->photo)
-                             
-                                    $img=Auth::user()->photo->getUrl('thumb');
-                                else
-                                $img="";
+                               
+                                $user=App\Models\User::where('email',$comment->email)->first();
+                                if($user->photo){
+                                    $img=$user->photo->getUrl('thumb');
+                                    }
+                                else{
+                                $img = "";
+                                }
                             
                             @endphp
-                                <img src="{{$img}}" alt="Admin"
+                                <img src="{{$img}}"
                                     class="rounded-circle" width="70" />
                                     <div class="media-body">
                                         <h5 class="mt-0 font400 clearfix">

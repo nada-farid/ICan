@@ -172,7 +172,7 @@
                     <div class="row ">
                         <div class="col-md-12 text-center">
 
-                            <button class="btn-primary"> <a href="{{ route('frontend.practical_solutions') }}"><i
+                            <button class="btn-primary"> <a  href="{{ route('frontend.practical_solutions') }}"><i
                                         class="fas fa-plus" aria-hidden="true"></i> عرض الكل </a> </button>
                         </div>
                     </div>

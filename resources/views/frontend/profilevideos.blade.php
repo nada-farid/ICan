@@ -8,10 +8,10 @@
             <nav aria-label="breadcrumb" class="main-breadcrumb" style="background-color: #2eb67d; color: #fff">
                 <ol class="breadcrumb" style="background-color: #2eb67d">
                     <li class="breadcrumb-item">
-                        <a href="index.html">أهلا بك يا : اسم المستخدم</a>
+                        <a href="index.html">أهلا بك يا : {{Auth::user()->name}}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="javascript:void(0)"><i class="fas fa-table"></i> 24-09-2021</a>
+                   
                     </li>
                 </ol>
             </nav>
@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-body text-right">
                             <div class="d-flex flex-column align-items-center text-center">
-                                @php
+                           @php
                                 if($user->photo)
                              
                                     $img=$user->photo->getUrl('thumb');
@@ -30,7 +30,7 @@
                                 $img="";
                             
                             @endphp
-                                <img src="{{$img}}" alt="{{Auth::user()->name }}"
+                                <img src="{{$img}}"alt="{{Auth::user()->name }}"
                                     class="rounded-circle" width="150" />
                                 <div class="mt-3">
                                     <h4> {{ $user->name ?? '' }} </h4>
