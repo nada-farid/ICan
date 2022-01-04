@@ -59,4 +59,8 @@ class HomeController extends Controller
         $video_participates = VideosParticipate::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(6);
         return view('frontend.profilevideos',compact('user','video_participates','practical_solutions','champions'));
     }
+    public function EditProfile(){
+        $user = Auth::user();
+        return view('frontend.EditProfile',compact('user'));
+    }
 }

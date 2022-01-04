@@ -21,9 +21,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
 
-    // Users
-    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::resource('users', 'UsersController');
+      // Users
+      Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+      Route::post('users/media', 'UsersController@storeMedia')->name('users.storeMedia');
+      Route::post('users/ckmedia', 'UsersController@storeCKEditorImages')->name('users.storeCKEditorImages');
+      Route::resource('users', 'UsersController');
 
     // Slider
     Route::delete('sliders/destroy', 'SliderController@massDestroy')->name('sliders.massDestroy');
@@ -124,8 +126,10 @@ Route::group([ 'namespace' => 'Frontend'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/user/profile','HomeController@profile')->name('frontend.profile');
+    Route::get('/user/profile_edit','HomeController@EditProfile')->name('frontend.profile_edit');
     Route::get('/user/profile_solves','HomeController@profile_solves')->name('frontend.profile_solves');
     Route::get('/user/profile_videos','HomeController@profile_videos')->name('frontend.profile_videos');
+    Route::Post('/user/UpdateProfile','AuthController@UpdateProfile')->name('frontend.UpdateProfile');
 
     Route::get('/about', 'AboutUsController@about')->name('frontend.about_us');
 
@@ -147,6 +151,8 @@ Route::group([ 'namespace' => 'Frontend'], function () {
     Route::Post('/problems/save', 'ProblemsController@store')->name('frontend.problem');
     Route::get('/register', 'AuthController@register')->name('frontend.register');
     Route::Post('/register', 'AuthController@store')->name('frontend.register_save');
+    Route::post('users/media', 'AuthController@storeMedia')->name('frontend.storeMedia');
+    Route::post('users/ckmedia', 'AuthController@storeCKEditorImages')->name('frontend.storeCKEditorImages');
 
     Route::post('/frontend/practical-solutions/media', 'PracticalSolutionsController@storeMedia')->name('frontend.practical-solutions.storeMedia');
     Route::post('/frontend/practical-solutions/ckmedia', 'PracticalSolutionsController@storeCKEditorImages')->name('frontend.practical-solutions.storeCKEditorImages'); 

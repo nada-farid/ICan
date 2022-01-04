@@ -153,8 +153,7 @@
                                     onclick="event.preventDefault(); document.getElementById('logoutform').submit();"> تسجيل
                                     الخروج </a>
                             </li>
-                            <li class="proplem_quick" style="background:cornflowerblue"><a
-                                    href="{{ route('frontend.profile') }}">{{ auth()->user()->name ?? '' }} </a></li>
+    
                         @else
 
                             <a href="#" data-toggle="modal" data-target="#login-modal"> <i class="far fa-user"></i> تسجيل
@@ -216,9 +215,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('frontend.contactus') }}">تـواصل معنا </a>
                             </li>
-
-
-                        </ul>
+                            @auth
+                            <li class="nav-item" ><a class="nav-link"
+                                href="{{ route('frontend.profile') }}">حسابي </a></li>
+                            @endauth
+                            </ul>
 
                     </div>
 

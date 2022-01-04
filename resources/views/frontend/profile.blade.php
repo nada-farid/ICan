@@ -20,7 +20,15 @@
                     <div class="card">
                         <div class="card-body text-right">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                @php
+                                if($user->photo)
+                             
+                                    $img=$user->photo->getUrl('thumb');
+                                else
+                                $img="";
+                            
+                            @endphp
+                                <img src="{{$img}}"  alt="{{Auth::user()->name }}"
                                     class="rounded-circle" width="150" />
                                 <div class="mt-3">
                                     <h4> {{ $user->name ?? '' }} </h4>
@@ -87,7 +95,10 @@
                             </div>
                         </div>
                     </div>
+                    <a class="btn btn-info" href="{{route('frontend.profile_edit') }}">تعديل 
+                     بياناتي الشخصيه</a>
                 </div>
+            
             </div>
         </div>
     </div>

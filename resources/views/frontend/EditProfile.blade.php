@@ -9,13 +9,13 @@
          <div class="col-md-8">
 
 <div class="have_problem">
-     <form action="{{ route('frontend.register_save') }}" method="Post">
+     <form action="{{ route('frontend.UpdateProfile') }}" method="Post">
                                @csrf
          <div class="form-group text-right">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>البريد الإلكتروني </label>
-                                        <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"type="text" name="email">
+                                        <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"type="text" name="email" value="{{ $user->email ?? '' }}">
                                         @if($errors->has('email'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('email') }}
@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>الاسم بالكامل </label>
-                                        <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name">
+                                        <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" value="{{ $user->name ?? '' }}">
                                         @if($errors->has('name'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('name') }}
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label> رقم الهاتف </label>
-                                        <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text" name="phone">
+                                        <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text" name="phone"  value="{{ $user->phone ?? '' }}">
                                         @if($errors->has('phone'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('phone') }}
@@ -89,7 +89,7 @@
          </div></div>
          
  
-                        <button  type= "submit"class="btn-primary"> <a> تسجيل  </a> </button>
+                        <button  type= "submit"class="btn-primary"> <a> حفظ  </a> </button>
 				  </form>
     
     </div>
@@ -103,13 +103,12 @@
         
    
         
-  
 
 @endsection
 @section('scripts')
 <script>
     Dropzone.options.photoDropzone = {
-    url: '{{ route('frontend.storeMedia') }}',
+    url: '{{ route('admin.users.storeMedia') }}',
     maxFilesize: 4, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     maxFiles: 1,

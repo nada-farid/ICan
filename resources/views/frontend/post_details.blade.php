@@ -2,6 +2,13 @@
 
 @section('content')
 
+    @php
+    if($post->photo){
+        $post_img = $post->photo->getUrl('preview2');
+    }else{
+        $post_img = "https://via.placeholder.com/800x300/FF7F50/000000";
+    }
+    @endphp
 
     <div class="page about">
 
@@ -23,12 +30,26 @@
                                     <i class="fa fa-tags"></i> {{ $post->title ?? '' }}
                                 </li>
                             </ul>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                <div class="image">
+                                    <img src="{{$post_img }}"alt="">
+                                </div>
+                            <br>
                             <p class="lead">{{ $post->description ?? '' }} </p>
                             <hr class="mb40">
                             <h4 class="mb40 text-uppercase font500">التعليقات</h4>
                             @foreach ($post->postComments as $comment)
                                 <div class="media mb40">
-                                    <i class="d-flex ml-3 fa fa-user-circle-o fa-3x"></i>
+                                     @php
+                                if(Auth::user()->photo)
+                             
+                                    $img=Auth::user()->photo->getUrl('thumb');
+                                else
+                                $img="";
+                            
+                            @endphp
+                                <img src="{{$img}}" alt="Admin"
+                                    class="rounded-circle" width="70" />
                                     <div class="media-body">
                                         <h5 class="mt-0 font400 clearfix">
 

@@ -24,7 +24,7 @@ class ContactusController extends Controller
 
         Contactu::create($request->all()); 
 
-        return redirect('/contact_us')->with('status', ' تم تسجيل أستفسارك بنجاج');
+        return redirect('/contact_us')->with('status', ' تم تسجيل أستفسارك بنجاح');
      
     }
 }
