@@ -31,7 +31,10 @@ class SliderController extends Controller
     {
         abort_if(Gate::denies('slider_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.sliders.create');
+        $practical_solutions = PracticalSolution::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $champions = Champion::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        return view('admin.sliders.create', compact('practical_solutions','champions'));
     }
 
     public function store(StoreSliderRequest $request)
